@@ -1,4 +1,8 @@
 const IMAGES = {
+    commonImages: {
+        logo: new URL("@/assets/images/common/logo.png", import.meta.url).href,
+        logo_intro: new URL("@/assets/images/common/logo_intro.png", import.meta.url).href,
+    },
     introImages: {
         character: new URL("@/assets/images/intro/character.png", import.meta.url).href,
         btnText: new URL("@/assets/images/intro/button_txt.png", import.meta.url).href,

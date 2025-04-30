@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
 // import axiosDefault from "../../lib/axios.ts";
-import Intro from "../Intro";
+import Intro from "@/components/Intro";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store";
 
 const Home = () => {
     // ** hooks
-    const [isIntro, setIsIntro] = useState(false);
+    const [isIntro, setIsIntro] = useState<boolean>(false);
 
     // ** store
     const { name } = useSelector((state: RootState) => state.user);
