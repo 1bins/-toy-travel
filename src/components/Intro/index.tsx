@@ -21,7 +21,6 @@ const Intro = () => {
             alert('[탑승 거부]\nERR:: 정확한 이름을 입력해주세요.');
             return;
         }
-        alert(`[탑승 준비]\n반갑습니다 ${userName}님.\n확인을 누르시면 여행 안내가 시작됩니다.`);
         setIsPass(!isPass);
 
         setTimeout(() => {
