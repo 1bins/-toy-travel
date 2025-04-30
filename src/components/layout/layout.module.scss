@@ -1,0 +1,14 @@
+@use "@/assets/scss/_variable" as s;
+
+main {
+  background: s.$color_bg;
+  height: 100vh;
+  
+  .main {
+    width: 580px;
+    height: 100vh;
+    margin: 0 auto;
+    background: #fff;
+    overflow-y: auto;
+  }
+}
