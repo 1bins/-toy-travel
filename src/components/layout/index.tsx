@@ -8,7 +8,7 @@ const Layout = () => {
     return(
         <main>
         <div className={cx('main')}>
-            메인페이지
+            {/* TODO:: 헤더 들어갈 자리 */}
             <Outlet/>
         </div>
         </main>

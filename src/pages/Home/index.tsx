@@ -1,10 +1,25 @@
 import {useEffect, useState} from "react";
-import axiosDefault from "../../lib/axios.ts";
+// import axiosDefault from "../../lib/axios.ts";
 import Intro from "../Intro";
+import {useSelector} from "react-redux";
+import {RootState} from "@/store";
 
 const Home = () => {
-    const [pageNum, setPageNum] = useState(1);
+    // ** hooks
+    const [isIntro, setIsIntro] = useState(false);
 
+    // ** store
+    const { name } = useSelector((state: RootState) => state.user);
+
+    // ** variables
+    useEffect(() => {
+        const user = localStorage.getItem('user');
+        if (user || name) {
+            setIsIntro(true);
+        }
+    }, [name]);
+
+    /*
     const onChangePage = (pageNum: number, totalCount: number) => {
         let totalPage = Math.ceil(totalCount / 10);
         if (pageNum >= totalPage) {
@@ -12,6 +27,7 @@ const Home = () => {
         }
         setPageNum(pageNum + 1);
     }
+    */
 
     /*
     useEffect(() => {
@@ -36,9 +52,9 @@ const Home = () => {
 
     return(
         <div>
-            <Intro/>
+            {!isIntro && <Intro/>}
             {/* TODO:: totalCount 가져오기 */}
-            <button onClick={() => onChangePage(pageNum, 20)}>다음 페이지</button>
+            {/*<button onClick={() => onChangePage(pageNum, 20)}>다음 페이지</button>*/}
         </div>
     )
 }
