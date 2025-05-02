@@ -61,7 +61,7 @@ const Home = () => {
             {!isIntro && <Intro/>}
             {/* 컨텐츠 없을 때 */}
             {/*<HomeAlert/>*/}
-            <HomeContent />
+            {isIntro && <HomeContent />}
         </div>
     )
 }

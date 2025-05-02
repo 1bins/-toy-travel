@@ -56,34 +56,39 @@ const Intro = () => {
                         </div>
                     )
                 }
-                <div className={cx('intro__form-box')}>
-                    <div className={cx('form-box', {'--isPass': isPass})}>
-                        <p className={cx('form-title')}>
-                            {isPass ? (
-                                <>
-                                    <b>{userName}</b>님, 여정을 시작합니다
-                                </>
-                            ) : (
-                                "떠나고자 하는 당신의 이름을 알려주세요!"
-                            )}
-                        </p>
-                        <div className={cx('input-box')}>
-                            <input
-                                type="text"
-                                placeholder="PASSPORT NAME"
-                                value={userName}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {setUserName(e.target.value)}}
-                                onKeyDown={(e) => handleKeyDown(e)}
-                            />
-                            <button
-                                type="button"
-                                onClick={onSubmit}
-                            >
-                                <img src={introImages.airplane} alt="비행기 아이콘"/>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                {
+                    isStart &&
+                    (
+                      <div className={cx('intro__form-box')}>
+                          <div className={cx('form-box', {'--isPass': isPass})}>
+                              <p className={cx('form-title')}>
+                                  {isPass ? (
+                                    <>
+                                        <b>{userName}</b>님, 여정을 시작합니다
+                                    </>
+                                  ) : (
+                                    "떠나고자 하는 당신의 이름을 알려주세요!"
+                                  )}
+                              </p>
+                              <div className={cx('input-box')}>
+                                  <input
+                                    type="text"
+                                    placeholder="PASSPORT NAME"
+                                    value={userName}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {setUserName(e.target.value)}}
+                                    onKeyDown={(e) => handleKeyDown(e)}
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={onSubmit}
+                                  >
+                                      <img src={introImages.airplane} alt="비행기 아이콘"/>
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+                    )
+                }
             </div>
         </section>
     )
