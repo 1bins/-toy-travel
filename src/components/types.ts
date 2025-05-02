@@ -6,3 +6,10 @@ export interface ButtonProps {
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
     children: React.ReactNode;
 }
+
+export interface MockData {
+    id?: number;
+    contentType?: number;
+    title: string;
+    imageUrl: string;
+}

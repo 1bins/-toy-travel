@@ -1,10 +1,12 @@
 import {useEffect, useState} from "react";
 import style from "./home.module.scss";
 import classNames from "classnames/bind";
-// import axiosDefault from "../../lib/axios.ts";
 import Intro from "@/components/Intro";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store";
+import HomeContent from "@/components/home/HomeContent.tsx";
+// import HomeAlert from "@/components/home/HomeAlert.tsx";
+// import axiosDefault from "../../lib/axios.ts";
 
 const cx = classNames.bind(style);
 
@@ -57,10 +59,9 @@ const Home = () => {
     return(
         <div className={cx('inner')}>
             {!isIntro && <Intro/>}
-            {/* TODO:: totalCount 가져오기 */}
-            {/*<button onClick={() => onChangePage(pageNum, 20)}>다음 페이지</button>*/}
-            <div className="home__none-box">
-            </div>
+            {/* 컨텐츠 없을 때 */}
+            {/*<HomeAlert/>*/}
+            <HomeContent />
         </div>
     )
 }

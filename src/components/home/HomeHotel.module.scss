@@ -1,0 +1,49 @@
+$bd_radius: 0.5rem;
+
+.hotel {
+  display: flex;
+  height: 12rem;
+  background: #f8f8f8;
+  border-radius: $bd_radius;
+  overflow: hidden;
+  justify-content: space-between;
+  cursor: pointer;
+  
+  .cont-box {
+    padding: 1.8rem 1.5rem;
+    position: relative;
+    
+    .title {
+      margin-bottom: 0.6rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .address {
+      font-size: 1.3rem;
+      color: #8b8b8b;
+      font-weight: 400;
+    }
+
+    .date {
+      position: absolute;
+      bottom: 1.8rem;
+      left: 1.5rem;
+      font-size: 1.3rem;
+      color: #8b8b8b;
+    }
+  }
+  
+  .img-box {
+    width: 31.486%;
+    height: 100%;
+    border-top-left-radius: $bd_radius;
+    border-bottom-left-radius: $bd_radius;
+    overflow: hidden;
+
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.inner {
+  padding: 10.8rem 3.2rem 0;
+
+  .attraction {
+    margin-bottom: 3.2rem;
+
+    .list-box {
+      display: flex;
+      margin-bottom: 1.4rem;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1.6rem 0;
+    }
+  }
+}
