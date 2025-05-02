@@ -7,6 +7,9 @@ const IMAGES = {
         character: new URL("@/assets/images/intro/character.png", import.meta.url).href,
         btnText: new URL("@/assets/images/intro/button_txt.png", import.meta.url).href,
         airplane: new URL("@/assets/images/intro/icon_plane.svg", import.meta.url).href,
+    },
+    mainImages: {
+        none_content: new URL("@/assets/images/main/none_content.png", import.meta.url).href,
     }
 }
 
