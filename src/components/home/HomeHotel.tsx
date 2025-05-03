@@ -15,7 +15,7 @@ const HomeHotel = () => {
         </p>
       </div>
       <div className={cx('img-box')}>
-        <img src="http://tong.visitkorea.or.kr/cms/resource/97/2548197_image2_1.jpg" className={cx('--full')} alt="호텔 이미지"/>
+        <img src="https://tong.visitkorea.or.kr/cms/resource/97/2548197_image2_1.jpg" className={cx('--full')} alt="호텔 이미지"/>
       </div>
     </div>
   )
