@@ -1,0 +1,7 @@
+@use "@/assets/scss/variable.scss" as v;
+
+.inner {
+  @include v.mediaPadding;
+
+
+}
