@@ -1,16 +1,21 @@
 import style from "./HomeContent.module.scss";
 import classNames from "classnames/bind";
-import Button from "@/components/button";
+import {useNavigate} from "react-router-dom";
 import { H3 } from "@/components/heading";
+import Button from "@/components/button";
 import HomeItem from "@/components/home/HomeItem.tsx";
+import HomeHotel from "@/components/home/HomeHotel.tsx";
 import {MockData} from "@/components/types.ts";
 
 const cx = classNames.bind(style);
 
 import {mockup} from "@/mocks/mockup.ts";
-import HomeHotel from "@/components/home/HomeHotel.tsx";
+
 
 const HomeContent = () => {
+  // ** hooks
+  const navigate = useNavigate();
+
   return(
     <div className={cx('inner')}>
       {/* 여행 목적지 */}
@@ -19,7 +24,11 @@ const HomeContent = () => {
         <div className={cx('list-box')}>
           {mockup.map((item: MockData, idx: number) => <HomeItem key={idx} {...item} />)}
         </div>
-        <Button type={'button'} shape={'with-character'}>목적지 추가하기</Button>
+        <Button
+          type={'button'}
+          shape={'with-character'}
+          onClick={() => navigate("/search")}
+        >목적지 추가하기</Button>
       </div>
       {/* 숙박 목적지 */}
       <div className={cx('hotel')}>

@@ -5,3 +5,11 @@ $color_primary_light: #00a2ff;
 
 $color_text1: #0f1424;
 $color_text_light: #a2a2a2;
+
+@mixin mediaPadding {
+  padding: 10.8rem 3.2rem 5rem;
+
+  @media screen and (max-width: 499px) {
+    padding: 8.8rem 1.6rem 5rem;
+  }
+}

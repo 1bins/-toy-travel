@@ -12,5 +12,9 @@ main {
     margin: 0 auto;
     background: #fff;
     overflow-y: auto;
+
+    @media screen and (max-width: 499px) {
+      width: auto;
+    }
   }
 }
