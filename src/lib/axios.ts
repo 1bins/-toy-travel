@@ -13,7 +13,7 @@ const axiosDefault = axios.create({
         MobileOS: "ETC",
         MobileApp: "AppTesting",
         _type: "json",
-        numOfRows: 31
+        numOfRows: 10
     }
 })
 

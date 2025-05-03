@@ -1,0 +1,11 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+
+  &-sigungu {
+    margin-top: 3.2rem;
+    padding-top: 2.7rem;
+    border-top: 1px solid #eee;
+  }
+}

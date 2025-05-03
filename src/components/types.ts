@@ -7,6 +7,17 @@ export interface ButtonProps {
     children: React.ReactNode;
 }
 
+export interface Location {
+    areaCode: number;
+    areaName: string;
+}
+
+export interface LocationSigungu {
+    rnum: number;
+    code: string;
+    name: string;
+}
+
 export interface MockData {
     id?: number;
     contentType?: number;

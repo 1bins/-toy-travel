@@ -5,6 +5,7 @@ import Intro from "@/components/Intro";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store";
 import HomeContent from "@/components/home/HomeContent.tsx";
+import HomeAlert from "@/components/home/HomeAlert.tsx";
 // import HomeAlert from "@/components/home/HomeAlert.tsx";
 // import axiosDefault from "../../lib/axios.ts";
 
