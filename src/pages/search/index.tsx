@@ -8,11 +8,13 @@ import {Location} from "@/components/types.ts";
 import {LocationSigungu} from "@/components/types.ts";
 import axiosDefault from "@/lib/axios.ts";
 import {LocationList} from "@/lib/location.ts";
+import {useNavigate} from "react-router-dom";
 
 const cx = classNames.bind(style);
 
 const Search = () => {
   // ** hooks
+  const navigate = useNavigate();
   const [clickedLocation, setClickedLocation] = useState<number>(0);
   const [clickedSigungu, setClickedSigungu] = useState<number>(0);
   const [sigunguData, setSigunguData] = useState<LocationSigungu[]>([]);
@@ -75,6 +77,7 @@ const Search = () => {
           <Button
             type={'button'}
             shape={'with-character'}
+            onClick={() => {navigate(`/result?areaCode=${clickedLocation}&sigunguCode=${clickedSigungu}`)}}
           >목적지 검색하기</Button>
         </div>
       }
