@@ -3,5 +3,9 @@
 .inner {
   @include v.mediaPadding;
 
-
+  .result-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem 0;
+  }
 }

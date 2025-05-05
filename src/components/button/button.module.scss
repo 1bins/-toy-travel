@@ -1,4 +1,9 @@
 @use "@/assets/scss/variable" as v;
+@keyframes likeAnimation {
+  from { opacity: 0; transform: scale(0.6); }
+  50% { opacity: 1; transform: scale(1.3); }
+  to { transform: scale(1); }
+}
 
 .button {
   width: 10.3rem;
@@ -31,6 +36,20 @@
 
     &:hover {
       background-position: 85% 42%;
+    }
+  }
+
+  &.like {
+    position: relative;
+    width: 2.6rem;
+    height: auto;
+    background: none;
+
+    &.isLike {
+      img {
+        opacity: 1 !important;
+        animation: likeAnimation 0.3s;
+      }
     }
   }
 }

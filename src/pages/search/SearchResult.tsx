@@ -1,7 +1,10 @@
 import style from './SearchResult.module.scss';
 import classNames from "classnames/bind";
 import {useLocation} from "react-router-dom";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import axiosDefault from "@/lib/axios.ts";
+import {FullPlaceInfo} from "@/components/types.ts";
+import SearchResultItem from "@/components/search/SearchResultItem.tsx";
 
 const cx = classNames.bind(style);
 
@@ -9,17 +12,67 @@ const SearchResult = () => {
   // ** hooks
   const location = useLocation();
   const query = new URLSearchParams(location.search);
+  const [totalPage, setTotalPage] = useState<number>(0);
+  const [pageNo, setPageNo] = useState<number>(1);
+  const [resultData, setResultData] = useState<FullPlaceInfo[]>([]);
 
   // ** variables
   const areaCode = query.get("areaCode");
   const sigunguCode = query.get("sigunguCode");
 
   useEffect(() => {
-    
-  }, [areaCode, sigunguCode]);
+    // TODO:: 코드값 없을때
+    if (!areaCode || !sigunguCode) {
+      alert('올바른 경로가 아닙니다');
+      return;
+    }
+
+    const getResult = async () => {
+      try {
+        const response = await axiosDefault.get('/areaBasedList1', {
+          params: {
+            areaCode,
+            sigunguCode,
+            numOfRows: 10,
+            pageNo,
+          }
+        });
+        const data = response.data.response.body;
+
+        setTotalPage(Math.round(data.totalCount / 10));
+        setResultData(data.items.item);
+      } catch(err) {
+        // TODO:: 에러 처리
+        console.log(err);
+      }
+    }
+
+    getResult();
+  }, [areaCode, sigunguCode, pageNo]);
+
+  const prevPage = () => {
+    if (pageNo <= 1) {
+      return;
+    }
+    setPageNo(pageNo - 1);
+  }
+
+  const nextPage = () => {
+    if (pageNo >= totalPage) {
+      return;
+    }
+    setPageNo(pageNo + 1);
+  }
 
   return (
-    <div className={cx('inner')}>결과페이지</div>
+    <div className={cx('inner')}>
+      <div className={cx('result-list')}>
+        {resultData.map((item, idx) => <SearchResultItem key={idx} {...item} />)}
+      </div>
+      <div className={cx('page-list')}>
+        { /* TODO:: 페이징 처리 */ }
+      </div>
+    </div>
   )
 }
 

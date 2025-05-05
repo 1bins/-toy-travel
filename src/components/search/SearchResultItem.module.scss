@@ -1,0 +1,52 @@
+@use '@/assets/scss/_variable.scss' as v;
+
+.inner {
+  box-shadow: 0.15rem 0.15rem 3.2rem rgba(0, 0, 0, .1);
+  border-radius: 0.6rem;
+  overflow: hidden;
+
+  .img-box {
+    img {
+      height: 20.8rem;
+      object-fit: cover;
+    }
+  }
+
+  .cont-box {
+    position: relative;
+    padding: 2.2rem 1.6rem 2.8rem;
+    color: v.$color_text1;
+
+    .title {
+      width: 85.8%;
+      font-size: 2rem;
+    }
+
+    .address {
+      margin-top: 0.8rem;
+      font-size: 1.5rem;
+    }
+
+    button {
+      position: absolute;
+      top: 1.6rem;
+      right: 1.5rem;
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        &.base {
+          filter: grayscale(1);
+          opacity: .25;
+        }
+
+        &.animation {
+          opacity: 0;
+          transform: scale(1);
+        }
+      }
+    }
+  }
+}
