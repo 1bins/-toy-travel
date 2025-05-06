@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import axiosDefault from "@/lib/axios.ts";
 import {FullPlaceInfo} from "@/components/types.ts";
 import SearchResultItem from "@/components/search/SearchResultItem.tsx";
+import Paging from "@/components/paging";
 
 const cx = classNames.bind(style);
 
@@ -13,7 +14,7 @@ const SearchResult = () => {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const [totalPage, setTotalPage] = useState<number>(0);
-  const [pageNo, setPageNo] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [resultData, setResultData] = useState<FullPlaceInfo[]>([]);
 
   // ** variables
@@ -33,8 +34,9 @@ const SearchResult = () => {
           params: {
             areaCode,
             sigunguCode,
+            contentTypeId: 12,
             numOfRows: 10,
-            pageNo,
+            pageNo: currentPage,
           }
         });
         const data = response.data.response.body;
@@ -48,21 +50,7 @@ const SearchResult = () => {
     }
 
     getResult();
-  }, [areaCode, sigunguCode, pageNo]);
-
-  const prevPage = () => {
-    if (pageNo <= 1) {
-      return;
-    }
-    setPageNo(pageNo - 1);
-  }
-
-  const nextPage = () => {
-    if (pageNo >= totalPage) {
-      return;
-    }
-    setPageNo(pageNo + 1);
-  }
+  }, [areaCode, sigunguCode, currentPage]);
 
   return (
     <div className={cx('inner')}>
@@ -70,7 +58,11 @@ const SearchResult = () => {
         {resultData.map((item, idx) => <SearchResultItem key={idx} {...item} />)}
       </div>
       <div className={cx('page-list')}>
-        { /* TODO:: 페이징 처리 */ }
+        <Paging currentPage={currentPage}
+                totalPage={totalPage}
+                onPageChange={setCurrentPage}
+                groupSize={5}
+        />
       </div>
     </div>
   )
