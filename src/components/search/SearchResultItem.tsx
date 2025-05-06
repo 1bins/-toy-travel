@@ -47,7 +47,10 @@ const SearchResultItem = (
         <Button
           type={"button"}
           shape={["like", isLike && "isLike"] as string[]}
-          onClick={addLike}
+          onClick={(e) => {
+            e.stopPropagation();
+            addLike();
+          }}
         >
           <img src={commonImages.icon_like} alt="하트 아이콘 흑백" className={cx('base', '--full')}/>
           <img src={commonImages.icon_like} alt="하트 아이콘" className={cx('animation', '--full')}/>
