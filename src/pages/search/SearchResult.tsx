@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import {useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axiosDefault from "@/lib/axios.ts";
-import {FullPlaceInfo} from "@/components/types.ts";
+import {PlaceResultInfo} from "@/components/types.ts";
 import SearchResultItem from "@/components/search/SearchResultItem.tsx";
 import Paging from "@/components/paging";
 
@@ -15,7 +15,7 @@ const SearchResult = () => {
   const query = new URLSearchParams(location.search);
   const [totalPage, setTotalPage] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [resultData, setResultData] = useState<FullPlaceInfo[]>([]);
+  const [resultData, setResultData] = useState<PlaceResultInfo[]>([]);
 
   // ** variables
   const areaCode = query.get("areaCode");

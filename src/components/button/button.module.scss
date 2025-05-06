@@ -56,6 +56,18 @@
     }
   }
 
+  // 나의 일정 추가
+  &.addMyList {
+    width: auto;
+    height: auto;
+    padding: 0.9rem 1.8rem;
+    background: #b6b6b6;
+
+    &.active {
+      background: v.$color_primary;
+    }
+  }
+
   // 페이징
   &.btn-paging {
     $width: 3.8rem;

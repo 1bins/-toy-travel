@@ -4,6 +4,7 @@ import classNames from "classnames/bind";
 import {Place} from "@/components/types.ts";
 import IMAGES from "@/lib/images.ts";
 import Button from "@/components/button";
+import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(style);
 const {commonImages} = IMAGES;
@@ -17,17 +18,23 @@ const SearchResultItem = (
     contenttypeid
   }: Place) => {
   // ** hooks
+  const navigate = useNavigate();
   const [isLike, setIsLike] = useState<boolean>(false);
-
 
   // ** variables
   const addLike = () => {
     setIsLike(!isLike);
   }
-  console.log(contentid, contenttypeid)
+
+  const onChangePage = (contentid: string, contenttypeid: string) => {
+    navigate(`/detail/${contentid}/${contenttypeid}`);
+  }
 
   return (
-    <div className={cx('inner')}>
+    <div
+      className={cx('inner')}
+      onClick={() => onChangePage(contentid, contenttypeid)}
+    >
       <div className={cx('img-box')}>
         {image ?
           <img src={image} className={cx('--full')} alt={`${title} 이미지`}/> :

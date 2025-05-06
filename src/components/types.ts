@@ -18,13 +18,12 @@ export interface LocationSigungu {
     name: string;
 }
 
-export interface FullPlaceInfo {
+interface PlaceBase {
     contentid: string;
     contenttypeid: string;
     title: string;
     addr1: string;
     addr2: string;
-    areacode: string;
     booktour: string;
     cat1: string;
     cat2: string;
@@ -37,12 +36,24 @@ export interface FullPlaceInfo {
     mapy: string;
     mlevel: string;
     modifiedtime: string;
-    sigungucode: string;
     tel: string;
     zipcode: string;
 }
 
-export type Place = Pick<FullPlaceInfo, 'title' | 'addr1' | 'firstimage' | 'contentid' | 'contenttypeid'>
+export interface PlaceResultInfo extends PlaceBase {
+    areacode: string;
+    sigungucode: string;
+}
+
+export interface PlaceDetailInfo extends PlaceBase {
+    cpyrhtDivCd: string;
+    homepage: string;
+    overview: string;
+}
+
+export type Place = Pick<PlaceResultInfo, 'title' | 'addr1' | 'firstimage' | 'contentid' | 'contenttypeid'>;
+
+export type PlaceDetail = Pick<PlaceDetailInfo, 'title' | 'addr1' | 'firstimage' | 'overview'>;
 
 export interface MockData {
     id?: number;
