@@ -3,6 +3,7 @@ const IMAGES = {
         logo: new URL("@/assets/images/common/logo.png", import.meta.url).href,
         logo_intro: new URL("@/assets/images/common/logo_intro.png", import.meta.url).href,
         icon_like: new URL("@/assets/images/common/icon_like.svg", import.meta.url).href,
+        icon_paging_arrow: new URL("@/assets/images/common/icon_paging_arrow.svg", import.meta.url).href,
         image_error: new URL("@/assets/images/common/image_error.jpg", import.meta.url).href,
     },
     introImages: {

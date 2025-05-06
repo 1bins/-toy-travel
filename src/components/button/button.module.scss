@@ -13,6 +13,7 @@
   background: v.$color_primary_light;
   border-radius: 0.5rem;
 
+  // 지역 선택
   &.location {
     width: 7.3rem;
     height: 3.3rem;
@@ -25,6 +26,7 @@
     }
   }
 
+  // 목적지 선택
   &.with-character{
     width: 100%;
     height: 5.4rem;
@@ -39,6 +41,7 @@
     }
   }
 
+  // 목적지 좋아요(저장)
   &.like {
     position: relative;
     width: 2.6rem;
@@ -49,6 +52,51 @@
       img {
         opacity: 1 !important;
         animation: likeAnimation 0.3s;
+      }
+    }
+  }
+
+  // 페이징
+  &.btn-paging {
+    $width: 3.8rem;
+
+    width: $width;
+    height: $width;
+    color: v.$color_text_light;
+    background: #fff;
+    border: 0.1rem solid v.$color_text_light;
+    border-radius: $width / 2;
+
+    &.active {
+      color: #fff;
+      background: v.$color_primary_light;
+      border: none;
+    }
+
+    &-prev,
+    &-next {
+      width: $width * 2;
+      color: #fff;
+      background: v.$color_primary_light;
+      border: none;
+
+      img {
+        display: inline-block;
+        vertical-align: -0.2rem;
+        height: 40%;
+      }
+    }
+
+    &-prev {
+      img {
+        margin-right: 0.5rem;
+        transform: rotate(180deg);
+      }
+    }
+
+    &-next {
+      img {
+        margin: 0 0 0 0.5rem;
       }
     }
   }
