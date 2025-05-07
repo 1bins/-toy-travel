@@ -25,15 +25,20 @@ const Paging = (
   const startPage = currentGroup * groupSize + 1;
   const endPage = Math.min(startPage + groupSize - 1, totalPage);
 
+  const handlePageChange = (page: number) => {
+    onPageChange(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   const handlePrevGroup = () => {
     const prevGroupStart = Math.max(startPage - groupSize, 1);
-    onPageChange(prevGroupStart);
+    handlePageChange(prevGroupStart);
   }
 
   const handleNextGroup = () => {
     const nextGroupStart = startPage + groupSize;
     if (nextGroupStart <= totalPage) {
-      onPageChange(nextGroupStart);
+      handlePageChange(nextGroupStart);
     }
   }
 
@@ -52,7 +57,7 @@ const Paging = (
           <Button
             key={pageNum}
             type={"button"}
-            onClick={() => onPageChange(pageNum)}
+            onClick={() => handlePageChange(pageNum)}
             shape={["btn-paging", pageNum === currentPage ? "active" : ""]}
           >
             {pageNum}
