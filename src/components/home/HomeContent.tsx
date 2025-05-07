@@ -34,7 +34,7 @@ const HomeContent = () => {
         <Button
           type={'button'}
           shape={'with-character'}
-          onClick={() => navigate("/search")}
+          onClick={() => navigate("/search?contentTypeId=12")}
         >목적지 추가하기</Button>
       </div>
       {/* 숙박 목적지 */}

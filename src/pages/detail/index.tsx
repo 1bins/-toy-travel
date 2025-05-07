@@ -21,15 +21,15 @@ const Detail = () => {
   const [data, setData] = useState<PlaceDetailInfo | null>(null);
 
   // ** variables
-  const { likedPlaces } = useSelector((state: RootState) => state.liked);
-  const isLike = likedPlaces.some((place: Place) => {
-    return place.contentid === data?.contentid
-  });
+  const { likedPlaces, likedHotels } = useSelector((state: RootState) => state.liked);
+  const isLike = contentTypeId === "12"
+    ? likedPlaces.some((place: Place) => place.contentid === data?.contentid)
+    : likedHotels.some((place: Place) => place.contentid === data?.contentid);
   const toggleLike = () => {
     if (!data) return;
 
     if (isLike) {
-      dispatch(removePlace(data.contentid));
+      dispatch(removePlace({contentid: data.contentid, contenttypeid: data.contenttypeid}));
     } else {
       dispatch(addPlace({title: data.title, firstimage: data.firstimage, addr1: data.addr1, contentid: data.contentid, contenttypeid: data.contenttypeid}));
     }

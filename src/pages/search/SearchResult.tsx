@@ -1,6 +1,6 @@
 import style from './SearchResult.module.scss';
 import classNames from "classnames/bind";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axiosDefault from "@/lib/axios.ts";
 import {PlaceResultInfo} from "@/components/types.ts";
@@ -11,6 +11,7 @@ const cx = classNames.bind(style);
 
 const SearchResult = () => {
   // ** hooks
+  const navigate = useNavigate();
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const [totalPage, setTotalPage] = useState<number>(0);
@@ -20,6 +21,7 @@ const SearchResult = () => {
   // ** variables
   const areaCode = query.get("areaCode");
   const sigunguCode = query.get("sigunguCode");
+  const contentTypeId = query.get("contentTypeId");
 
   useEffect(() => {
     // TODO:: 코드값 없을때
@@ -34,15 +36,20 @@ const SearchResult = () => {
           params: {
             areaCode,
             sigunguCode,
-            contentTypeId: 12,
+            contentTypeId,
             numOfRows: 10,
             pageNo: currentPage,
           }
         });
         const data = response.data.response.body;
 
-        setTotalPage(Math.round(data.totalCount / 10));
-        setResultData(data.items.item);
+        if (data.totalCount === 0) {
+          alert('조회된 관광지가 없습니다.');
+          navigate("/search", {replace: false});
+        } else {
+          setTotalPage(Math.round(data.totalCount / 10));
+          setResultData(data.items.item);
+        }
       } catch(err) {
         // TODO:: 에러 처리
         console.log(err);
@@ -52,7 +59,7 @@ const SearchResult = () => {
     getResult();
   }, [areaCode, sigunguCode, currentPage]);
 
-  return resultData ? (
+  return (
     <div className={cx('inner')}>
       <div className={cx('result-list')}>
         {resultData.map((item, idx) => (
@@ -68,11 +75,7 @@ const SearchResult = () => {
         />
       </div>
     </div>
-  ) : (
-    <>
-      // TODO:: 에러페이지
-    </>
-  );
+  )
 }
 
 export default SearchResult;

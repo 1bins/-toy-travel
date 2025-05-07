@@ -20,7 +20,7 @@ const HomeAlert = () => {
           <br/>아래 버튼을 통해 새로운 목적지를 찾아볼까요?</p>
         <Button
           type={"button"}
-          onClick={() => {navigate("/search")}}
+          onClick={() => {navigate("/search?contentTypeId=12")}}
         >추가하기</Button>
       </div>
     </div>

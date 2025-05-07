@@ -24,13 +24,15 @@ const SearchResultItem = (
   const dispatch = useDispatch();
 
   // ** variables
-  const { likedPlaces } = useSelector((state: RootState) => state.liked);
-  const isLike = likedPlaces.some(place => place.contentid === contentid);
+  const { likedPlaces, likedHotels } = useSelector((state: RootState) => state.liked);
+  const isLike = contenttypeid === "12"
+    ? likedPlaces.some((place: Place) => place.contentid === contentid)
+    : likedHotels.some((place: Place) => place.contentid === contentid);
   const toggleLike = (e: React.MouseEvent) => {
     e.stopPropagation();
 
     if (isLike) {
-      dispatch(removePlace(contentid));
+      dispatch(removePlace({contentid: contentid, contenttypeid: contenttypeid}));
     } else {
       dispatch(addPlace({title, firstimage: image, addr1: address, contentid, contenttypeid}));
     }
