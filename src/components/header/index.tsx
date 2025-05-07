@@ -1,6 +1,6 @@
 import style from './header.module.scss';
 import classNames from "classnames/bind";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/store";
@@ -13,11 +13,14 @@ const { commonImages } = IMAGES;
 const Header = () => {
     // ** hooks
     const navigate = useNavigate();
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
     const dispatch = useDispatch();
     const [isIntro, setIsIntro] = useState<boolean>(false);
 
     // ** store
     const { name } = useSelector((state: RootState) => state.user);
+    const isSkip = query.get("skip");
     const user = localStorage.getItem('user');
 
     // ** variables
@@ -40,7 +43,7 @@ const Header = () => {
             <div className={cx('inner')}>
                 <h1>
                     <Link to={"/"}>
-                        <img src={isIntro ? commonImages.logo : commonImages.logo_intro} alt="여행어때 로고 이미지"/>
+                        <img src={isSkip || isIntro ? commonImages.logo : commonImages.logo_intro} alt="여행어때 로고 이미지"/>
                     </Link>
                 </h1>
             </div>

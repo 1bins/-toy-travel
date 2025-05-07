@@ -44,8 +44,8 @@ const SearchResult = () => {
         const data = response.data.response.body;
 
         if (data.totalCount === 0) {
-          alert('조회된 관광지가 없습니다.');
-          navigate("/search", {replace: false});
+          alert('조회된 항목이 없습니다.');
+          navigate(-1);
         } else {
           setTotalPage(Math.round(data.totalCount / 10));
           setResultData(data.items.item);
