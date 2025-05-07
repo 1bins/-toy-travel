@@ -37,7 +37,8 @@
   .cont-box {
     position: absolute;
     bottom: 1.5rem;
-    left: 1.2rem;
+    left: 0;
+    padding: 0 1.2rem;
     color: #fff;
     z-index: 2;
 
@@ -47,9 +48,11 @@
       font-weight: 700;
     }
 
-    .date {
+    .address {
       font-size: 1.3rem;
       color: #dbdbdb;
+      line-height: 1.3;
+      word-break: keep-all;
     }
   }
 }

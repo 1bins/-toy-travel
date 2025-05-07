@@ -53,11 +53,6 @@ export interface PlaceDetailInfo extends PlaceBase {
 
 export type Place = Pick<PlaceResultInfo, 'title' | 'addr1' | 'firstimage' | 'contentid' | 'contenttypeid'>;
 
-export type PlaceDetail = Pick<PlaceDetailInfo, 'title' | 'addr1' | 'firstimage' | 'overview'>;
+export type LikedPlace = Pick<PlaceDetailInfo, 'title' | 'addr1' | 'firstimage' | 'contentid' | 'contenttypeid'>;
 
-export interface MockData {
-    id?: number;
-    contentType?: number;
-    title: string;
-    imageUrl: string;
-}
+export type PlaceDetail = LikedPlace & Pick<PlaceDetailInfo, 'overview'>;

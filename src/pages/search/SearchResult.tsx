@@ -52,20 +52,27 @@ const SearchResult = () => {
     getResult();
   }, [areaCode, sigunguCode, currentPage]);
 
-  return (
+  return resultData ? (
     <div className={cx('inner')}>
       <div className={cx('result-list')}>
-        {resultData.map((item, idx) => <SearchResultItem key={idx} {...item} />)}
+        {resultData.map((item, idx) => (
+          <SearchResultItem key={idx} {...item} />
+        ))}
       </div>
       <div className={cx('page-list')}>
-        <Paging currentPage={currentPage}
-                totalPage={totalPage}
-                onPageChange={setCurrentPage}
-                groupSize={5}
+        <Paging
+          currentPage={currentPage}
+          totalPage={totalPage}
+          onPageChange={setCurrentPage}
+          groupSize={5}
         />
       </div>
     </div>
-  )
+  ) : (
+    <>
+      // TODO:: 에러페이지
+    </>
+  );
 }
 
 export default SearchResult;

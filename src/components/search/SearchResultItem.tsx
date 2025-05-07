@@ -1,10 +1,12 @@
-import {useState} from "react";
 import style from './SearchResultItem.module.scss';
 import classNames from "classnames/bind";
 import {Place} from "@/components/types.ts";
 import IMAGES from "@/lib/images.ts";
 import Button from "@/components/button";
 import { useNavigate } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "@/store";
+import {addPlace, removePlace} from "@/store/likedSlice.ts";
 
 const cx = classNames.bind(style);
 const {commonImages} = IMAGES;
@@ -19,11 +21,19 @@ const SearchResultItem = (
   }: Place) => {
   // ** hooks
   const navigate = useNavigate();
-  const [isLike, setIsLike] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   // ** variables
-  const addLike = () => {
-    setIsLike(!isLike);
+  const { likedPlaces } = useSelector((state: RootState) => state.liked);
+  const isLike = likedPlaces.some(place => place.contentid === contentid);
+  const toggleLike = (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    if (isLike) {
+      dispatch(removePlace(contentid));
+    } else {
+      dispatch(addPlace({title, firstimage: image, addr1: address, contentid, contenttypeid}));
+    }
   }
 
   const onChangePage = (contentid: string, contenttypeid: string) => {
@@ -47,10 +57,7 @@ const SearchResultItem = (
         <Button
           type={"button"}
           shape={["like", isLike && "isLike"] as string[]}
-          onClick={(e) => {
-            e.stopPropagation();
-            addLike();
-          }}
+          onClick={toggleLike}
         >
           <img src={commonImages.icon_like} alt="하트 아이콘 흑백" className={cx('base', '--full')}/>
           <img src={commonImages.icon_like} alt="하트 아이콘" className={cx('animation', '--full')}/>

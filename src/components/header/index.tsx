@@ -1,20 +1,24 @@
 import style from './header.module.scss';
 import classNames from "classnames/bind";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useState, useEffect} from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/store";
 import IMAGES from "@/lib/images.ts";
+import {removePlaceAll} from "@/store/likedSlice.ts";
 
 const cx = classNames.bind(style);
 const { commonImages } = IMAGES;
 
 const Header = () => {
     // ** hooks
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [isIntro, setIsIntro] = useState<boolean>(false);
 
     // ** store
     const { name } = useSelector((state: RootState) => state.user);
+    const user = localStorage.getItem('user');
 
     // ** variables
     useEffect(() => {
@@ -23,6 +27,13 @@ const Header = () => {
             setIsIntro(true);
         }
     }, [name]);
+
+    useEffect(() => {
+        if (!user) {
+            navigate("/");
+            dispatch(removePlaceAll());
+        }
+    }, [user]);
 
     return(
         <header>

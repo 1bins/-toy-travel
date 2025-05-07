@@ -6,8 +6,6 @@ import {useSelector} from "react-redux";
 import {RootState} from "@/store";
 import HomeContent from "@/components/home/HomeContent.tsx";
 import HomeAlert from "@/components/home/HomeAlert.tsx";
-// import HomeAlert from "@/components/home/HomeAlert.tsx";
-// import axiosDefault from "../../lib/axios.ts";
 
 const cx = classNames.bind(style);
 
@@ -17,6 +15,7 @@ const Home = () => {
 
     // ** store
     const { name } = useSelector((state: RootState) => state.user);
+    const { likedPlaces } = useSelector((state: RootState) => state.liked);
 
     // ** variables
     useEffect(() => {
@@ -26,43 +25,16 @@ const Home = () => {
         }
     }, [name]);
 
-    /*
-    const onChangePage = (pageNum: number, totalCount: number) => {
-        let totalPage = Math.ceil(totalCount / 10);
-        if (pageNum >= totalPage) {
-            return;
-        }
-        setPageNum(pageNum + 1);
-    }
-    */
-
-    /*
-    useEffect(() => {
-        const fetchData = async() => {
-            try {
-                const response = await axiosDefault.get("areaCode1", {
-                    params: {
-                        // areaCode: 31,
-                        numOfRows: 10,
-                        pageNo: pageNum,
-                    }
-                })
-                console.log(response.data);
-            } catch(err) {
-                console.log(err);
-            }
-        }
-
-        fetchData();
-    }, [pageNum]);
-    */
-
     return(
         <div className={cx('inner')}>
-            {!isIntro && <Intro/>}
-            {/* 컨텐츠 없을 때 */}
-            {/*<HomeAlert/>*/}
-            {isIntro && <HomeContent />}
+            {!isIntro ?
+              <Intro/>
+              :
+              likedPlaces.length > 0 ?
+                <HomeContent/>
+              :
+                <HomeAlert/>
+            }
         </div>
     )
 }
