@@ -6,6 +6,7 @@ import axiosDefault from "@/lib/axios.ts";
 import {PlaceResultInfo} from "@/components/types.ts";
 import SearchResultItem from "@/components/search/SearchResultItem.tsx";
 import Paging from "@/components/paging";
+import Skeleton from "@/components/skeleton";
 
 const cx = classNames.bind(style);
 
@@ -14,6 +15,7 @@ const SearchResult = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const query = new URLSearchParams(location.search);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [totalPage, setTotalPage] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [resultData, setResultData] = useState<PlaceResultInfo[]>([]);
@@ -48,6 +50,7 @@ const SearchResult = () => {
           navigate(-1);
         } else {
           setTotalPage(Math.round(data.totalCount / 10));
+          setIsLoading(false);
           setResultData(data.items.item);
         }
       } catch(err) {
@@ -64,19 +67,30 @@ const SearchResult = () => {
       <p className={cx('result-title')}>
         {contentTypeId === "12" ? "관광 목적지 검색" : "숙박지 검색"}
       </p>
-      <div className={cx('result-list')}>
-        {resultData.map((item, idx) => (
-          <SearchResultItem key={idx} {...item} />
-        ))}
-      </div>
-      <div className={cx('page-list')}>
-        <Paging
-          currentPage={currentPage}
-          totalPage={totalPage}
-          onPageChange={setCurrentPage}
-          groupSize={5}
-        />
-      </div>
+      {
+        isLoading ?
+          (
+            Array.from({ length: 10 }).map((_, idx: number) => (
+              <Skeleton key={idx} />
+            ))
+          )
+          :
+          <>
+            <div className={cx('result-list')}>
+              {resultData.map((item, idx) => (
+                <SearchResultItem key={idx} {...item} />
+              ))}
+            </div>
+            <div className={cx('page-list')}>
+              <Paging
+                currentPage={currentPage}
+                totalPage={totalPage}
+                onPageChange={setCurrentPage}
+                groupSize={5}
+              />
+            </div>
+          </>
+        }
     </div>
   )
 }

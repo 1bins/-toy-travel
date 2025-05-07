@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import style from './detail.module.scss';
 import classNames from "classnames/bind";
 import axiosDefault from "@/lib/axios.ts";
@@ -10,12 +10,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {addPlace, removePlace} from "@/store/likedSlice.ts";
 import {RootState} from "@/store";
 import {Place} from "@/components/types.ts";
+import Skeleton from "@/components/skeleton";
 
 const cx = classNames.bind(style);
 const {commonImages} = IMAGES;
 
 const Detail = () => {
   // ** hooks
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const {contentId, contentTypeId} = useParams();
   const [data, setData] = useState<PlaceDetailInfo | null>(null);
@@ -57,37 +59,40 @@ const Detail = () => {
       } catch (err) {
         // TODO:: 에러 처리
         console.log(err);
+        alert('존재하지 않는 페이지입니다.')
+        navigate(-1);
       }
     }
 
     getDetailPage();
   }, [contentId, contentTypeId]);
 
-  return data ? (
+  return (
     <div className={cx('inner')}>
-      <div className={cx('upper-box')}>
-        <p className={cx('address')}>{data.addr1}</p>
-        <p className={cx('title')}>{data.title}</p>
-        <Button
-          type={"button"}
-          shape={["addMyList", isLike ? "" : "active", contentTypeId === "32" ? "hotel" : ""]}
-          onClick={toggleLike}
-        >{isLike ? <><img src={commonImages.icon_check} alt="저장된 아이콘"/>저장된 나의 일정</> : "나의 일정에 추가하기"}</Button>
-      </div>
-      <div className={cx('img-box')}>
-        {data.firstimage ?
-          <img src={data.firstimage} className={cx('--full')} alt={`${data.title} 이미지`}/> :
-          <img src={commonImages.image_error} className={cx('--full')} alt={"오류 이미지"}/>
-        }
-      </div>
-      <div className={cx('cont-box')}>
-        <p className={cx('description')}>{data.overview}</p>
-      </div>
-    </div>
-  ) :
-  (
-    <div>
-      없는 페이지 입니다.
+      {data ?
+        <>
+          <div className={cx('upper-box')}>
+            <p className={cx('address')}>{data.addr1}</p>
+            <p className={cx('title')}>{data.title}</p>
+            <Button
+              type={"button"}
+              shape={["addMyList", isLike ? "" : "active", contentTypeId === "32" ? "hotel" : ""]}
+              onClick={toggleLike}
+            >{isLike ? <><img src={commonImages.icon_check} alt="저장된 아이콘"/>저장된 나의 일정</> : "나의 일정에 추가하기"}</Button>
+          </div>
+          <div className={cx('img-box')}>
+            {data.firstimage ?
+              <img src={data.firstimage} className={cx('--full')} alt={`${data.title} 이미지`}/> :
+              <img src={commonImages.image_error} className={cx('--full')} alt={"오류 이미지"}/>
+            }
+          </div>
+          <div className={cx('cont-box')}>
+            <p className={cx('description')}>{data.overview}</p>
+          </div>
+        </>
+        :
+        <Skeleton header={true}/>
+      }
     </div>
   )
 }
