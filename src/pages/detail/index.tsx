@@ -70,7 +70,7 @@ const Detail = () => {
         <p className={cx('title')}>{data.title}</p>
         <Button
           type={"button"}
-          shape={["addMyList", isLike ? "" : "active"]}
+          shape={["addMyList", isLike ? "" : "active", contentTypeId === "32" ? "hotel" : ""]}
           onClick={toggleLike}
         >{isLike ? <><img src={commonImages.icon_check} alt="저장된 아이콘"/>저장된 나의 일정</> : "나의 일정에 추가하기"}</Button>
       </div>

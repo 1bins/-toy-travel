@@ -3,6 +3,12 @@
 .inner {
   @include v.mediaPadding;
 
+  .result-title {
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+    font-weight: 700;
+  }
+
   .result-list {
     display: flex;
     flex-direction: column;

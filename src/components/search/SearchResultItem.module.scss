@@ -47,6 +47,10 @@
           opacity: 0;
           transform: scale(1);
         }
+
+        &.hotel {
+          filter: invert(1);
+        }
       }
     }
   }

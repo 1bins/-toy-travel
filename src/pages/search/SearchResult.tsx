@@ -61,6 +61,9 @@ const SearchResult = () => {
 
   return (
     <div className={cx('inner')}>
+      <p className={cx('result-title')}>
+        {contentTypeId === "12" ? "관광 목적지 검색" : "숙박지 검색"}
+      </p>
       <div className={cx('result-list')}>
         {resultData.map((item, idx) => (
           <SearchResultItem key={idx} {...item} />

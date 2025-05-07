@@ -22,7 +22,13 @@
     border: 1px solid;
 
     &.selected {
-      color: v.$color_primary
+      background: v.$color_primary;
+      color: #fff;
+      border: none;
+
+      &.hotel {
+        background: v.$color_secondary;
+      }
     }
   }
 
@@ -41,7 +47,7 @@
     }
     
     &.hotel {
-      background-color: #ffb700;
+      background-color: v.$color_secondary;
     }
   }
 
@@ -69,6 +75,10 @@
 
     &.active {
       background: v.$color_primary;
+
+      &.hotel {
+        background: v.$color_secondary;
+      }
     }
   }
 

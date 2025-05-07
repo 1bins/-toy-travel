@@ -62,7 +62,7 @@ const SearchResultItem = (
           onClick={toggleLike}
         >
           <img src={commonImages.icon_like} alt="하트 아이콘 흑백" className={cx('base', '--full')}/>
-          <img src={commonImages.icon_like} alt="하트 아이콘" className={cx('animation', '--full')}/>
+          <img src={commonImages.icon_like} alt="하트 아이콘" className={cx(['animation', '--full', contenttypeid === "32" && "hotel"])}/>
         </Button>
       </div>
     </div>

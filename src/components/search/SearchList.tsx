@@ -6,6 +6,7 @@ const cx = classNames.bind(style);
 
 interface Props<T> {
   list: T[];
+  contentTypeId: string | null;
   selectedCode: number;
   getCode: (item: T) => number;
   getName: (item: T) => string;
@@ -16,6 +17,7 @@ interface Props<T> {
 const SearchList = <T,>(
   {
     list,
+    contentTypeId,
     selectedCode,
     getCode,
     getName,
@@ -32,7 +34,7 @@ const SearchList = <T,>(
           <Button
             key={code}
             type={"button"}
-            shape={["location", selectedCode === code && "selected"] as string[]}
+            shape={["location", selectedCode === code && "selected", contentTypeId === "32" ? "hotel" : ""] as string[]}
             onClick={() => onClick(code)}
           >{name}</Button>
         )

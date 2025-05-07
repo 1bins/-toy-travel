@@ -60,6 +60,7 @@ const Search = () => {
     <div className={cx('inner')}>
       <H3>STEP1. <b>어디로 떠나실 건가요?</b></H3>
       <SearchList<Location>
+        contentTypeId={contentTypeId}
         list={LocationList}
         selectedCode={clickedLocation}
         getCode={(item) => item.areaCode}
@@ -67,6 +68,7 @@ const Search = () => {
         onClick={changeLocation}
       />
       <SearchList<LocationSigungu>
+        contentTypeId={contentTypeId}
         list={sigunguData}
         selectedCode={clickedSigungu}
         getCode={(item) => parseInt(item.code)}

@@ -29,7 +29,10 @@ const HomeHotel = () => {
               <p className={cx('address')}>{likedHotels[0].addr1}</p>
             </div>
             <div className={cx('img-box')}>
-              <img src={likedHotels[0].firstimage} className={cx('--full')} alt={`${likedHotels[0].title} 이미지`}/>
+              {
+                likedHotels[0].firstimage &&
+                <img src={likedHotels[0].firstimage} className={cx('--full')} alt={`${likedHotels[0].title} 이미지`}/>
+              }
             </div>
           </div>
           :
