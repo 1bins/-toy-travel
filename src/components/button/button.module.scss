@@ -77,7 +77,7 @@
     color: v.$color_text_light;
     background: #fff;
     border: 0.1rem solid v.$color_text_light;
-    border-radius: $width / 2;
+    border-radius: calc($width / 2);
 
     &.active {
       color: #fff;

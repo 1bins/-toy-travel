@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const serviceKey = "oqstjzumQ5124t7uVd5VZy/6QEtLK0YCF0b16HdHsW1nOAFd+xqVf742QW5XD9AQugVjvmT6AnUjMQ3+RlNyxw==";
-const baseURL = `https://apis.data.go.kr/B551011/KorService1`;
+const serviceKey = import.meta.env.VITE_SERVICE_KEY;
+const baseURL = import.meta.env.VITE_API_URL;
 
 const axiosDefault = axios.create({
     baseURL,
