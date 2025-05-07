@@ -12,6 +12,14 @@ body {
   font-family: 'Pretendard', sans-serif;
   line-height: 1;
   color: v.$color_text1;
+  &::-webkit-scrollbar {width: 0.8rem;}
+  &::-webkit-scrollbar-track-piece {background-color: #fff;}
+  &::-webkit-scrollbar-thumb {
+    background-color: v.$color_primary_light;
+    border-radius: 6px;
+  }
+  &::-webkit-scrollbar-thumb:hover {background-color: v.$color_primary;}
+
 }
 
 * {
