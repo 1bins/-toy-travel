@@ -37,7 +37,7 @@ const Toast = (
     <>
       {isOpen &&
         <div
-          className={cx(['inner', contentTypeId || contentTypeIdString === "32" ? "hotel" : ""])}>
+          className={cx(['inner', (contentTypeId === "32" || contentTypeIdString === "32") ? "hotel" : ""])}>
             <p>{message}</p>
         </div>
       }
