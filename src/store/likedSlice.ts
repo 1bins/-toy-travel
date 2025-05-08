@@ -30,7 +30,7 @@ const likedSlice = createSlice({
             state.likedHotels.push(action.payload);
             localStorage.setItem('likedHotels', JSON.stringify(state.likedHotels));
           } else {
-            alert('숙박지는 최대 1개까지만 추가 가능합니다.')
+            alert('숙박지는 최대 1개까지만 설정 가능합니다.')
           }
         }
       }
