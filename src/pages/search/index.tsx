@@ -31,10 +31,16 @@ const Search = () => {
           numOfRows: 31
         }
       })
+
+      if (!response.data.response) {
+        throw new Error('서비스 접속 에러');
+      }
+
       setSigunguData(response.data.response.body.items.item);
     } catch (err) {
-      // TODO:: 오류 처리
       console.log(err);
+      alert('현재 서비스 이용이 불가능 합니다. \n잠시 후 다시 시도해주세요.');
+      setClickedLocation(0);
     }
   }
 

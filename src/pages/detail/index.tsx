@@ -38,6 +38,12 @@ const Detail = () => {
   }
 
   useEffect(() => {
+    if (!contentId || !contentTypeId) {
+      alert('올바른 경로가 아닙니다');
+      navigate("/", {replace: true});
+      return;
+    }
+
     const getDetailPage = async () => {
       try {
         const response = await axiosDefault.get('detailCommon1', {
@@ -53,14 +59,18 @@ const Detail = () => {
           }
         })
 
+        if (!response.data.response) {
+          throw new Error('서비스 접속 에러');
+        }
+
         const data = response.data.response.body.items.item[0];
         setData(data);
 
       } catch (err) {
         // TODO:: 에러 처리
         console.log(err);
-        alert('존재하지 않는 페이지입니다.')
-        navigate(-1);
+        alert('현재 서비스 이용이 불가능 합니다. \n잠시 후 다시 시도해주세요.');
+        navigate(`/search?contentTypeId=${contentTypeId}`, {replace: true});
       }
     }
 

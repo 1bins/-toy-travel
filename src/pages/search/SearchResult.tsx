@@ -26,9 +26,9 @@ const SearchResult = () => {
   const contentTypeId = query.get("contentTypeId");
 
   useEffect(() => {
-    // TODO:: 코드값 없을때
     if (!areaCode || !sigunguCode) {
       alert('올바른 경로가 아닙니다');
+      navigate(`/search?contentTypeId=${contentTypeId}`, {replace: true});
       return;
     }
 
@@ -43,6 +43,11 @@ const SearchResult = () => {
             pageNo: currentPage,
           }
         });
+
+        if (!response.data.response) {
+          throw new Error('서비스 접속 에러');
+        }
+
         const data = response.data.response.body;
 
         if (data.totalCount === 0) {
@@ -54,8 +59,9 @@ const SearchResult = () => {
           setResultData(data.items.item);
         }
       } catch(err) {
-        // TODO:: 에러 처리
         console.log(err);
+        alert('현재 서비스 이용이 불가능 합니다. \n잠시 후 다시 시도해주세요.');
+        navigate(`/search?contentTypeId=${contentTypeId}`, {replace: true});
       }
     }
 
