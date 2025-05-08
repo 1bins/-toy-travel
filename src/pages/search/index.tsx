@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
 import style from './search.module.scss';
 import classNames from "classnames/bind";
 import SearchList from "@/components/search/SearchList.tsx";
@@ -6,9 +7,10 @@ import {H3} from "@/components/heading";
 import Button from "@/components/button";
 import {Location} from "@/components/types.ts";
 import {LocationSigungu} from "@/components/types.ts";
+import Modal from "@/components/modal";
 import axiosDefault from "@/lib/axios.ts";
 import {LocationList} from "@/lib/location.ts";
-import {useLocation, useNavigate} from "react-router-dom";
+import IMAGES from "@/lib/images.ts";
 
 const cx = classNames.bind(style);
 
@@ -17,11 +19,13 @@ const Search = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const query = new URLSearchParams(location.search);
+  const [isLoading, setIsLoading] = useState(false);
   const [clickedLocation, setClickedLocation] = useState<number>(0);
   const [clickedSigungu, setClickedSigungu] = useState<number>(0);
   const [sigunguData, setSigunguData] = useState<LocationSigungu[]>([]);
 
   // ** variables
+  const {modalImages} = IMAGES;
   const contentTypeId = query.get("contentTypeId");
   const getSigungu = async (areaCode: number) => {
     try {
@@ -41,6 +45,8 @@ const Search = () => {
       console.log(err);
       alert('현재 서비스 이용이 불가능 합니다. \n잠시 후 다시 시도해주세요.');
       setClickedLocation(0);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -49,6 +55,7 @@ const Search = () => {
       alert("이미 선택된 지역입니다");
       return;
     }
+    setIsLoading(true);
     setClickedSigungu(0);
     getSigungu(code);
     setClickedLocation(code);
@@ -64,6 +71,10 @@ const Search = () => {
 
   return (
     <div className={cx('inner')}>
+      {isLoading &&
+        <Modal>
+            <img src={modalImages.loading} alt="로딩 이미지"/>
+        </Modal>}
       <H3>STEP1. <b>어디로 떠나실 건가요?</b></H3>
       <SearchList<Location>
         contentTypeId={contentTypeId}
