@@ -5,14 +5,19 @@ const cx = classNames.bind(style);
 
 interface Props {
   header?: boolean;
+  content?: boolean;
 }
 
-const Skeleton = ({header}: Props) => {
+const Skeleton = (
+  { header,
+    content = true,
+  }
+  : Props) => {
   return (
     <div className={cx('inner')}>
       {header && (<div className={cx('skeleton', 'skeleton-header')}></div>)}
       <div className={cx('skeleton', 'skeleton-image')}></div>
-      <div className={cx('skeleton', 'skeleton-content')}></div>
+      {content && <div className={cx('skeleton', 'skeleton-content')}></div>}
     </div>
   )
 }

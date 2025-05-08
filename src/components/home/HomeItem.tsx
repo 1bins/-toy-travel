@@ -1,8 +1,10 @@
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 import style from './HomeItem.module.scss';
 import classNames from 'classnames/bind';
 import {Place} from "@/components/types.ts";
 import IMAGES from "@/lib/images.ts";
-import {useNavigate} from "react-router-dom";
+import Skeleton from "@/components/skeleton";
 
 const cx = classNames.bind(style);
 const {commonImages} = IMAGES;
@@ -16,6 +18,8 @@ const HomeItem = (
   }: Place) => {
   // ** hooks
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+
   // ** variables
   const onChangePage = (contentid: string, contenttypeid: string) => {
     navigate(`/detail/${contentid}/${contenttypeid}`);
@@ -27,10 +31,13 @@ const HomeItem = (
       onClick={() => onChangePage(contentid, contenttypeid)}
     >
       <div className={cx('img-box')}>
-        {firstimage ?
-          <img src={firstimage} alt={`${title} 이미지`} className={cx('--full')}/>
-          :
-          <img src={commonImages.image_error} className={cx('--full')} alt={"오류 이미지"}/>}
+        {isLoading && <Skeleton content={false} />}
+        <img
+          src={firstimage || commonImages.image_error}
+          alt={`${title} 이미지`}
+          className={cx('--full')}
+          onLoad={() => setIsLoading(false)}
+        />
       </div>
       <div className={cx('cont-box')}>
         <p className={cx('title')}>{title}</p>
