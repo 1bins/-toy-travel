@@ -3,6 +3,11 @@
 .inner {
   @include v.mediaPadding;
 
+  .btn-back {
+    margin-bottom: 1.5rem;
+    width: 2.4rem;
+  }
+
   .upper-box {
     position: relative;
 

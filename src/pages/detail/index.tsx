@@ -79,6 +79,16 @@ const Detail = () => {
 
   return (
     <div className={cx('inner')}>
+      <button
+        type="button"
+        className={cx('btn-back')}
+        onClick={() => {navigate(-1)}}
+      >
+        <img
+          src={commonImages.icon_back}
+          alt="뒤로가기 아이콘"
+        />
+      </button>
       {data ?
         <>
           <div className={cx('upper-box')}>
