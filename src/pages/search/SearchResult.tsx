@@ -81,7 +81,7 @@ const SearchResult = () => {
           <Button
             type={"button"}
             shape={"location"}
-            onClick={() => navigate(`/search?contentTypeId=${contentTypeId}`)}
+            onClick={() => navigate(`/search?contentTypeId=${contentTypeId}`, {state: {areaCode}})}
           >다른 지역 선택하기</Button>
         </div>
       </div>

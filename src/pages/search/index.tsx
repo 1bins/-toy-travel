@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import style from './search.module.scss';
 import classNames from "classnames/bind";
@@ -18,9 +18,10 @@ const Search = () => {
   // ** hooks
   const navigate = useNavigate();
   const location = useLocation();
+  const resultAreaCode = location.state?.areaCode;
   const query = new URLSearchParams(location.search);
   const [isLoading, setIsLoading] = useState(false);
-  const [clickedLocation, setClickedLocation] = useState<number>(0);
+  const [clickedLocation, setClickedLocation] = useState<number>(parseInt(resultAreaCode) || 0);
   const [clickedSigungu, setClickedSigungu] = useState<number>(0);
   const [sigunguData, setSigunguData] = useState<LocationSigungu[]>([]);
 
@@ -68,6 +69,13 @@ const Search = () => {
     }
     setClickedSigungu(code);
   }
+
+  useEffect(() => {
+    if (typeof resultAreaCode === "string") {
+      setIsLoading(true);
+      getSigungu(parseInt(resultAreaCode));
+    }
+  }, [resultAreaCode]);
 
   return (
     <div className={cx('inner')}>
