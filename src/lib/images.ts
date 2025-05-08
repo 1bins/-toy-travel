@@ -14,6 +14,9 @@ const IMAGES = {
     },
     mainImages: {
         none_content: new URL("@/assets/images/main/none_content.png", import.meta.url).href,
+    },
+    modalImages: {
+        loading: new URL("@/assets/images/modal/loading.png", import.meta.url).href,
     }
 }
 
