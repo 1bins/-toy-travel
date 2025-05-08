@@ -42,7 +42,7 @@ const Header = () => {
         <header>
             <div className={cx('inner')}>
                 <h1>
-                    <Link to={"/"}>
+                    <Link to={isSkip ? "/?skip=1" : "/"}>
                         <img src={isSkip || isIntro ? commonImages.logo : commonImages.logo_intro} alt="여행어때 로고 이미지"/>
                     </Link>
                 </h1>
