@@ -91,10 +91,7 @@ const Detail = () => {
             >{isLike ? <><img src={commonImages.icon_check} alt="저장된 아이콘"/>저장된 나의 일정</> : "나의 일정에 추가하기"}</Button>
           </div>
           <div className={cx('img-box')}>
-            {data.firstimage ?
-              <img src={data.firstimage} className={cx('--full')} alt={`${data.title} 이미지`}/> :
-              <img src={commonImages.image_error} className={cx('--full')} alt={"오류 이미지"}/>
-            }
+            <img src={data.firstimage || commonImages.image_error} className={cx('--full')} alt={`${data.title} 이미지`}/>
           </div>
           <div className={cx('cont-box')}>
             <p className={cx('description')}>{data.overview}</p>

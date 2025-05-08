@@ -48,10 +48,7 @@ const SearchResultItem = (
       onClick={() => onChangePage(contentid, contenttypeid)}
     >
       <div className={cx('img-box')}>
-        {image ?
-          <img src={image} className={cx('--full')} alt={`${title} 이미지`}/> :
-          <img src={commonImages.image_error} className={cx('--full')} alt={`${title} 이미지`}/>
-        }
+          <img src={image || commonImages.image_error} className={cx('--full')} alt={`${title} 이미지`}/>
       </div>
       <div className={cx('cont-box')}>
         <p className={cx('title')}>{title}</p>
