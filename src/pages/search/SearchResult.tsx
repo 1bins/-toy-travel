@@ -7,6 +7,7 @@ import {PlaceResultInfo} from "@/components/types.ts";
 import SearchResultItem from "@/components/search/SearchResultItem.tsx";
 import Paging from "@/components/paging";
 import Skeleton from "@/components/skeleton";
+import Button from "@/components/button";
 
 const cx = classNames.bind(style);
 
@@ -24,6 +25,7 @@ const SearchResult = () => {
   const areaCode = query.get("areaCode");
   const sigunguCode = query.get("sigunguCode");
   const contentTypeId = query.get("contentTypeId");
+  const address = resultData[0]?.addr1 || "";
 
   useEffect(() => {
     if (!areaCode || !sigunguCode) {
@@ -70,9 +72,19 @@ const SearchResult = () => {
 
   return (
     <div className={cx('inner')}>
-      <p className={cx('result-title')}>
-        {contentTypeId === "12" ? "관광 목적지 검색" : "숙박지 검색"}
-      </p>
+      <div className={cx('inner-title')}>
+        <p className={cx('result-title')}>
+          {contentTypeId === "12" ? "관광 목적지 검색" : "숙박지 검색"}
+        </p>
+        <div className={cx('info-box')}>
+          <p className={cx('place')}>📌 {`${address?.split(" ")[0] || ""} ${address?.split(" ")[1] || ""}`}</p>
+          <Button
+            type={"button"}
+            shape={"location"}
+            onClick={() => navigate(`/search?contentTypeId=${contentTypeId}`)}
+          >다른 지역 선택하기</Button>
+        </div>
+      </div>
       {
         isLoading ?
           (
