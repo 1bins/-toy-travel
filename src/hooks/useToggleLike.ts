@@ -2,9 +2,11 @@ import {addPlace, removePlace} from "@/store/likedSlice.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/store";
 import {Place} from "@/components/types.ts";
+import {useNavigate} from "react-router-dom";
 
 export const useToggleLike = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { likedPlaces, likedHotels } = useSelector((state: RootState) => state.liked);
 
   const isLiked = (contentid: string, contenttypeid: string) => {
@@ -33,7 +35,13 @@ export const useToggleLike = () => {
       const likedHotelCount = likedHotels.length;
 
       if (isHotel && likedHotelCount >= 1) {
-        if (fallbackAlert) alert('숙박지는 최대 1개까지만 설정 가능합니다.');
+        if (fallbackAlert) {
+          const message = confirm("숙박지는 최대 1개까지만 설정 가능합니다. \n저장된 숙박지로 이동하시겠습니까?");
+          const {contentid, contenttypeid} = likedHotels[0];
+          if (message) {
+           navigate(`/detail/${contentid}/${contenttypeid}`);
+          }
+        }
         return;
       }
 
