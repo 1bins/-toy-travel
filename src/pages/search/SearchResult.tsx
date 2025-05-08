@@ -8,6 +8,9 @@ import SearchResultItem from "@/components/search/SearchResultItem.tsx";
 import Paging from "@/components/paging";
 import Skeleton from "@/components/skeleton";
 import Button from "@/components/button";
+import Toast from "@/components/toast";
+import {useToast} from "@/hooks/useToast.ts";
+
 
 const cx = classNames.bind(style);
 
@@ -22,6 +25,7 @@ const SearchResult = () => {
   const [resultData, setResultData] = useState<PlaceResultInfo[]>([]);
 
   // ** variables
+  const { isOpen, message, showToast, closeToast } = useToast();
   const areaCode = query.get("areaCode");
   const sigunguCode = query.get("sigunguCode");
   const contentTypeId = query.get("contentTypeId");
@@ -96,7 +100,11 @@ const SearchResult = () => {
           <>
             <div className={cx('result-list')}>
               {resultData.map((item, idx) => (
-                <SearchResultItem key={idx} {...item} />
+                <SearchResultItem
+                  key={idx}
+                  {...item}
+                  onLike={(msg) => showToast(msg)}
+                />
               ))}
             </div>
             <div className={cx('page-list')}>
@@ -109,6 +117,7 @@ const SearchResult = () => {
             </div>
           </>
         }
+        <Toast message={message} isOpen={isOpen} onClose={closeToast} />
     </div>
   )
 }

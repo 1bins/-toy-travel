@@ -4,12 +4,14 @@ import {Place} from "@/components/types.ts";
 import IMAGES from "@/lib/images.ts";
 import Button from "@/components/button";
 import { useNavigate } from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "@/store";
-import {addPlace, removePlace} from "@/store/likedSlice.ts";
+import {useToggleLike} from "@/hooks/useToggleLike.ts";
 
 const cx = classNames.bind(style);
 const {commonImages} = IMAGES;
+
+interface Props extends Place {
+  onLike: (msg: string) => void;
+}
 
 const SearchResultItem = (
   {
@@ -17,26 +19,23 @@ const SearchResultItem = (
     firstimage: image,
     addr1: address,
     contentid,
-    contenttypeid
-  }: Place) => {
+    contenttypeid,
+    onLike
+  }: Props) => {
   // ** hooks
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   // ** variables
-  const { likedPlaces, likedHotels } = useSelector((state: RootState) => state.liked);
-  const isLike = contenttypeid === "12"
-    ? likedPlaces.some((place: Place) => place.contentid === contentid)
-    : likedHotels.some((place: Place) => place.contentid === contentid);
-  const toggleLike = (e: React.MouseEvent) => {
+  const { toggleLike, isLiked } = useToggleLike();
+  const onClickLike = (e: React.MouseEvent) => {
     e.stopPropagation();
 
-    if (isLike) {
-      dispatch(removePlace({contentid: contentid, contenttypeid: contenttypeid}));
-    } else {
-      dispatch(addPlace({title, firstimage: image, addr1: address, contentid, contenttypeid}));
-    }
+    toggleLike({
+      data: {title, addr1: address, firstimage: image, contentid, contenttypeid},
+      showToast: onLike
+    });
   }
+  const isLike = isLiked(contentid, contenttypeid);
 
   const onChangePage = (contentid: string, contenttypeid: string) => {
     navigate(`/detail/${contentid}/${contenttypeid}`);
@@ -56,7 +55,7 @@ const SearchResultItem = (
         <Button
           type={"button"}
           shape={["like", isLike && "isLike"] as string[]}
-          onClick={toggleLike}
+          onClick={onClickLike}
         >
           <img src={commonImages.icon_like} alt="하트 아이콘 흑백" className={cx('base', '--full')}/>
           <img src={commonImages.icon_like} alt="하트 아이콘" className={cx(['animation', '--full', contenttypeid === "32" && "hotel"])}/>

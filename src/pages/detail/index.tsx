@@ -6,11 +6,10 @@ import axiosDefault from "@/lib/axios.ts";
 import {PlaceDetailInfo} from "@/components/types.ts";
 import Button from "@/components/button";
 import IMAGES from "@/lib/images.ts";
-import {useDispatch, useSelector} from "react-redux";
-import {addPlace, removePlace} from "@/store/likedSlice.ts";
-import {RootState} from "@/store";
-import {Place} from "@/components/types.ts";
 import Skeleton from "@/components/skeleton";
+import Toast from "@/components/toast";
+import {useToast} from "@/hooks/useToast.ts";
+import { useToggleLike } from "@/hooks/useToggleLike";
 
 const cx = classNames.bind(style);
 const {commonImages} = IMAGES;
@@ -18,24 +17,17 @@ const {commonImages} = IMAGES;
 const Detail = () => {
   // ** hooks
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const {contentId, contentTypeId} = useParams();
   const [data, setData] = useState<PlaceDetailInfo | null>(null);
 
   // ** variables
-  const { likedPlaces, likedHotels } = useSelector((state: RootState) => state.liked);
-  const isLike = contentTypeId === "12"
-    ? likedPlaces.some((place: Place) => place.contentid === data?.contentid)
-    : likedHotels.some((place: Place) => place.contentid === data?.contentid);
-  const toggleLike = () => {
+  const { isOpen, message, showToast, closeToast } = useToast();
+  const { toggleLike, isLiked } = useToggleLike();
+  const onClickLike = () => {
     if (!data) return;
-
-    if (isLike) {
-      dispatch(removePlace({contentid: data.contentid, contenttypeid: data.contenttypeid}));
-    } else {
-      dispatch(addPlace({title: data.title, firstimage: data.firstimage, addr1: data.addr1, contentid: data.contentid, contenttypeid: data.contenttypeid}));
-    }
+    toggleLike({ data, showToast });
   }
+  const isLike = data ? isLiked(data.contentid, data.contenttypeid) : false;
 
   useEffect(() => {
     if (!contentId || !contentTypeId) {
@@ -97,7 +89,7 @@ const Detail = () => {
             <Button
               type={"button"}
               shape={["like", isLike && "isLike"] as string[]}
-              onClick={toggleLike}
+              onClick={onClickLike}
             >
               <img src={commonImages.icon_like} alt="하트 아이콘 흑백" className={cx('base', '--full')}/>
               <img src={commonImages.icon_like} alt="하트 아이콘" className={cx(['animation', '--full', contentTypeId === "32" && "hotel"])}/>
@@ -113,6 +105,7 @@ const Detail = () => {
         :
         <Skeleton header={true}/>
       }
+      <Toast message={message} isOpen={isOpen} onClose={closeToast} />
     </div>
   )
 }

@@ -26,12 +26,8 @@ const likedSlice = createSlice({
       } else {
         const exists = state.likedHotels.some(p => p.contentid === action.payload.contentid);
         if (!exists) {
-          if (state.likedHotels.length === 0) {
-            state.likedHotels.push(action.payload);
-            localStorage.setItem('likedHotels', JSON.stringify(state.likedHotels));
-          } else {
-            alert('숙박지는 최대 1개까지만 설정 가능합니다.')
-          }
+          state.likedHotels.push(action.payload);
+          localStorage.setItem('likedHotels', JSON.stringify(state.likedHotels));
         }
       }
     },

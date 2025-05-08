@@ -1,7 +1,7 @@
 import style from './toast.module.scss';
 import classNames from "classnames/bind";
 import {useEffect} from "react";
-import { useLocation } from 'react-router-dom';
+import {useLocation, useParams} from 'react-router-dom';
 
 const cx = classNames.bind(style);
 
@@ -19,7 +19,8 @@ const Toast = (
   // ** hooks
   const location = useLocation();
   const query = new URLSearchParams(location.search);
-  const contentTypeId = query.get('contentTypeId');
+  const contentTypeIdString = query.get('contentTypeId');
+  const {contentTypeId} = useParams();
 
   // ** variables
   useEffect(() => {
@@ -36,7 +37,7 @@ const Toast = (
     <>
       {isOpen &&
         <div
-          className={cx(['inner', contentTypeId === "32" ? "hotel" : ""])}>
+          className={cx(['inner', contentTypeId || contentTypeIdString === "32" ? "hotel" : ""])}>
             <p>{message}</p>
         </div>
       }
