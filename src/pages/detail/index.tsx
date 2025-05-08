@@ -86,9 +86,12 @@ const Detail = () => {
             <p className={cx('title')}>{data.title}</p>
             <Button
               type={"button"}
-              shape={["addMyList", isLike ? "" : "active", contentTypeId === "32" ? "hotel" : ""]}
+              shape={["like", isLike && "isLike"] as string[]}
               onClick={toggleLike}
-            >{isLike ? <><img src={commonImages.icon_check} alt="저장된 아이콘"/>저장된 나의 일정</> : "나의 일정에 추가하기"}</Button>
+            >
+              <img src={commonImages.icon_like} alt="하트 아이콘 흑백" className={cx('base', '--full')}/>
+              <img src={commonImages.icon_like} alt="하트 아이콘" className={cx(['animation', '--full', contentTypeId === "32" && "hotel"])}/>
+            </Button>
           </div>
           <div className={cx('img-box')}>
             <img src={data.firstimage || commonImages.image_error} className={cx('--full')} alt={`${data.title} 이미지`}/>
