@@ -80,6 +80,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    background: #fff;
 
     .form-box {
       position: relative;
@@ -139,8 +140,10 @@
 
           button {
             left: 50%;
+            width: 27rem;
+            max-width: 80vw;
             transform: translate(-50%, -50%);
-            transition: all .5s;
+            transition: left .5s, transform .5s .3s;
             pointer-events: none;
 
             img {
