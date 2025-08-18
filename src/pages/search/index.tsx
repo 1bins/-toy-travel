@@ -5,8 +5,7 @@ import classNames from "classnames/bind";
 import SearchList from "@/components/search/SearchList.tsx";
 import {H3} from "@/components/heading";
 import Button from "@/components/button";
-import {Location} from "@/components/types.ts";
-import {LocationSigungu} from "@/components/types.ts";
+import {Location, LocationSigungu} from "@/components/types.ts";
 import Modal from "@/components/modal";
 import axiosDefault from "@/lib/axios.ts";
 import {LocationList} from "@/lib/location.ts";
@@ -30,7 +29,7 @@ const Search = () => {
   const contentTypeId = query.get("contentTypeId");
   const getSigungu = async (areaCode: number) => {
     try {
-      const response = await axiosDefault.get("areaCode1", {
+      const response = await axiosDefault.get("areaCode2", {
         params: {
           areaCode,
           numOfRows: 31

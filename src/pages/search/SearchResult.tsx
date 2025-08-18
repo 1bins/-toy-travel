@@ -40,7 +40,7 @@ const SearchResult = () => {
 
     const getResult = async () => {
       try {
-        const response = await axiosDefault.get('/areaBasedList1', {
+        const response = await axiosDefault.get('/areaBasedList2', {
           params: {
             areaCode,
             sigunguCode,
