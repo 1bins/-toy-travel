@@ -9,7 +9,7 @@ import IMAGES from "@/lib/images.ts";
 import Skeleton from "@/components/skeleton";
 import Toast from "@/components/toast";
 import {useToast} from "@/hooks/useToast.ts";
-import { useToggleLike } from "@/hooks/useToggleLike";
+import {useToggleLike} from "@/hooks/useToggleLike";
 
 const cx = classNames.bind(style);
 const {commonImages} = IMAGES;
@@ -38,16 +38,9 @@ const Detail = () => {
 
     const getDetailPage = async () => {
       try {
-        const response = await axiosDefault.get('detailCommon1', {
+        const response = await axiosDefault.get('/detailCommon2', {
           params: {
-            contentTypeId,
             contentId,
-            defaultYN: "Y",
-            firstImageYN: "Y",
-            addrinfoYN: "Y",
-            catcodeYN: "Y",
-            mapinfoYN: "Y",
-            overviewYN: "Y",
           }
         })
 
@@ -62,7 +55,7 @@ const Detail = () => {
         // TODO:: 에러 처리
         console.log(err);
         alert('현재 서비스 이용이 불가능 합니다. \n잠시 후 다시 시도해주세요.');
-        navigate(`/search?contentTypeId=${contentTypeId}`, {replace: true});
+        // navigate(`/search?contentTypeId=${contentTypeId}`, {replace: true});
       }
     }
 
