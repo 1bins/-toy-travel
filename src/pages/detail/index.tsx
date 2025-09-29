@@ -54,7 +54,8 @@ const Detail = () => {
       } catch (err) {
         // TODO:: 에러 처리
         console.log(err);
-        alert('현재 서비스 이용이 불가능 합니다. \n잠시 후 다시 시도해주세요.');
+        // alert('현재 서비스 이용이 불가능 합니다. \n잠시 후 다시 시도해주세요.');
+        alert('국가정보자원관리원 화재로 Open API 서비스가 일시 중지되었습니다.');
         // navigate(`/search?contentTypeId=${contentTypeId}`, {replace: true});
       }
     }
