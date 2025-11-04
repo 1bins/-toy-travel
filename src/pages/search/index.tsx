@@ -1,14 +1,14 @@
-import {useEffect, useState} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import style from './search.module.scss';
 import classNames from "classnames/bind";
 import SearchList from "@/components/search/SearchList.tsx";
-import {H3} from "@/components/heading";
+import { H3 } from "@/components/heading";
 import Button from "@/components/button";
-import {Location, LocationSigungu} from "@/components/types.ts";
+import { Location, LocationSigungu } from "@/components/types.ts";
 import Modal from "@/components/modal";
 import axiosDefault from "@/lib/axios.ts";
-import {LocationList} from "@/lib/location.ts";
+import { LocationList } from "@/lib/location.ts";
 import IMAGES from "@/lib/images.ts";
 
 const cx = classNames.bind(style);
@@ -43,8 +43,7 @@ const Search = () => {
       setSigunguData(response.data.response.body.items.item);
     } catch (err) {
       console.log(err);
-      // alert('현재 서비스 이용이 불가능 합니다. \n잠시 후 다시 시도해주세요.');
-      alert('국가정보자원관리원 화재로 Open API 서비스가 일시 중지되었습니다.');
+      alert('현재 서비스 이용이 불가능 합니다. \n잠시 후 다시 시도해주세요.');
       setClickedLocation(0);
     } finally {
       setIsLoading(false);

@@ -1,15 +1,15 @@
 import style from './SearchResult.module.scss';
 import classNames from "classnames/bind";
-import {useLocation, useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import axiosDefault from "@/lib/axios.ts";
-import {PlaceResultInfo} from "@/components/types.ts";
+import { PlaceResultInfo } from "@/components/types.ts";
 import SearchResultItem from "@/components/search/SearchResultItem.tsx";
 import Paging from "@/components/paging";
 import Skeleton from "@/components/skeleton";
 import Button from "@/components/button";
 import Toast from "@/components/toast";
-import {useToast} from "@/hooks/useToast.ts";
+import { useToast } from "@/hooks/useToast.ts";
 
 
 const cx = classNames.bind(style);
@@ -66,9 +66,7 @@ const SearchResult = () => {
         }
       } catch(err) {
         console.log(err);
-        // alert('현재 서비스 이용이 불가능 합니다. \n잠시 후 다시 시도해주세요.');
-        alert('국가정보자원관리원 화재로 Open API 서비스가 일시 중지되었습니다.');
-        navigate(`/search?contentTypeId=${contentTypeId}`, {replace: true});
+        alert('현재 서비스 이용이 불가능 합니다. \n잠시 후 다시 시도해주세요.');
       }
     }
 

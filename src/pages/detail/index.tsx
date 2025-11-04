@@ -1,15 +1,15 @@
-import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import style from './detail.module.scss';
 import classNames from "classnames/bind";
 import axiosDefault from "@/lib/axios.ts";
-import {PlaceDetailInfo} from "@/components/types.ts";
+import { PlaceDetailInfo } from "@/components/types.ts";
 import Button from "@/components/button";
 import IMAGES from "@/lib/images.ts";
 import Skeleton from "@/components/skeleton";
 import Toast from "@/components/toast";
-import {useToast} from "@/hooks/useToast.ts";
-import {useToggleLike} from "@/hooks/useToggleLike";
+import { useToast } from "@/hooks/useToast.ts";
+import { useToggleLike } from "@/hooks/useToggleLike";
 
 const cx = classNames.bind(style);
 const {commonImages} = IMAGES;
@@ -54,9 +54,8 @@ const Detail = () => {
       } catch (err) {
         // TODO:: 에러 처리
         console.log(err);
-        // alert('현재 서비스 이용이 불가능 합니다. \n잠시 후 다시 시도해주세요.');
-        alert('국가정보자원관리원 화재로 Open API 서비스가 일시 중지되었습니다.');
-        // navigate(`/search?contentTypeId=${contentTypeId}`, {replace: true});
+        alert('현재 서비스 이용이 불가능 합니다. \n잠시 후 다시 시도해주세요.');
+        navigate(`/search?contentTypeId=${contentTypeId}`, {replace: true});
       }
     }
 
